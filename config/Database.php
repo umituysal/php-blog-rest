@@ -1,12 +1,12 @@
 <?php 
   class Database {
-    // DB Params
+  //database tanımlama
     private $host = 'localhost';
     private $db_name = 'blog';
     private $username = 'root';
     private $password = '';
     private $conn;
-    // DB Connect
+    //database baglanma
     public function connect() {
       $this->conn = null;
       try { 
