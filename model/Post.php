@@ -9,7 +9,7 @@ class Post{
     public $body;
     public $author;
     public $created_at;
-
+//database baglanır ilk olarak
     public function __construct($db){
         $this->conn=$db;
     }
@@ -29,7 +29,7 @@ class Post{
             categories c ON p.category_id=c.id
             ORDER BY
             p.created_at DESC ';
-
+            //güvenli bir sekilde sorguyu al ve calıstır
             $stmt=$this->conn->prepare($query);
             $stmt->execute();
         return $stmt;
@@ -51,6 +51,7 @@ class Post{
             WHERE
             p.id=?           
             LIMIT 0,1';
+        
     $stmt=$this->conn->prepare($query);
     $stmt->bindParam(1,$this->id);
     $stmt->execute();
@@ -72,13 +73,13 @@ class Post{
         $this->body=htmlspecialchars(strip_tags($this->body));
         $this->author=htmlspecialchars(strip_tags($this->author));
        $this->category_id=htmlspecialchars(strip_tags($this->category_id));
-
+//verileri belirtilen sütunlara  kaydet
        $stmt->bindParam(':title', $this->title);
        $stmt->bindParam(':body', $this->body);
        $stmt->bindParam(':author', $this->author);
        $stmt->bindParam(':category_id', $this->category_id);
        
-         // Execute query
+         // Sorguyu calıstır
           if($stmt->execute()) {
             return true;
       }
